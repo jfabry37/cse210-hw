@@ -1,54 +1,46 @@
 
+//using System.ComponentModel.DataAnnotations;
+
 public class Journal
 {
 
-public List<string> _entries = new List<string>();
-public List<string> promtList = new List<string>();
+public static List<Entry> entries = new List<Entry>();
 
     public void AddEntry(Entry newEntry)
     {   
-        PromtGenerator promptGen = new PromtGenerator();
-        promptGen.GetRandomPrompt();
-        string promts = promptGen.GetRandomPrompt();
-        Console.WriteLine(promts);
-        promtList.Add(promts);
+        PromptGenerator promptGen = new PromptGenerator();
+        newEntry._promptText = promptGen.GetRandomPrompt();
+        Console.WriteLine(newEntry._promptText);
+        Console.Write(">");
         newEntry._entryText = Console.ReadLine();
-        _entries.Add(newEntry._entryText);
+        newEntry._date = DateTime.Now;
+        Journal.entries.Add(newEntry);
     }
 
     public void SaveToFile(string fileName)
-    {
+
+    {  
         using (StreamWriter outputFile = new StreamWriter(fileName))
-        {
-        foreach (string entry in _entries)
-        {
-            for (int i = 0; i < promtList.Count; i++)
+        {   
+            
+            foreach (Entry entry in entries)
             {
-                string _promtText = promtList[i];
-            //    Console.WriteLine($"Date: {newEntry._date} - {_promtText}:");  
-                Console.WriteLine(entry);
+                outputFile.WriteLine($"{entry._date}|{entry._promptText}|{entry._entryText}");
             }
-        }
-        }
+        }  
+
     }
     public void LoadFromFile(string fileName)
     {
-        _entries.Clear();
         string[] lines = System.IO.File.ReadAllLines(fileName);
         foreach (string line in lines)
         {
-            _entries.Add(line);
+            string[] parts = line.Split('|');
+            Entry entry = new Entry();
+            entry._date = DateTime.Parse(parts[0]);
+            entry._promptText = parts[1];
+            entry._entryText = parts[2];
+            entries.Add(entry);
         }
     }
 }
-
-       // foreach (string entry in newJournal._entries)
-      //  {
-    //        for (int i = 0; i < newJournal.promtList.Count; i++)
-          //  {
-        //        string _promtText = newJournal.promtList[i];
-
-      //          string line1 = ($"Date: {_date} - {_promtText}:");  
-               // string line2 = (entry);
-             //   outputlist.Add(line1);
-           //     outputlist.Add(line2);

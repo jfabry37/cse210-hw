@@ -2,12 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
+
 class Program
 {   
     static void Main(string[] args)
     {   string choice = "";
         Journal newJournal = new Journal();
-        Entry newEntry = new Entry();
+      
 
         while (choice != "5")
         {
@@ -25,24 +26,27 @@ class Program
             if (choice == "1")
             {
                 // Write
-                newJournal.AddEntry(newEntry);
+                newJournal.AddEntry(new Entry());
             }
             else if (choice == "2")
             {
                 // Display
-                newEntry.DisplayEntry(newJournal);
+                Entry entry = new Entry();
+                entry.DisplayEntry();
             }
             else if (choice == "3")
             {
                 // Load
-                //Journal loadJournal = new Journal();
-               // newJournal.LoadFromFile("fileName");
+                Console.Write("Enter the filename to load: ");
+                string fileName = Console.ReadLine();
+                newJournal.LoadFromFile(fileName);
             }
             else if (choice == "4")
             {
                 // Save
-                //Journal saveJournal = new Journal();
-                newJournal.SaveToFile("fileName");
+                Console.Write("Enter the filename to save: ");
+                string fileName = Console.ReadLine();
+                newJournal.SaveToFile(fileName);
             }
             
         }
