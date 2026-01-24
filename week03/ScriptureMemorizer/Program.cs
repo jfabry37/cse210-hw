@@ -4,8 +4,9 @@ class Program
 {
     static void Main(string[] args)
     {
-        Reference newReference = new Reference ("mom",5,6);
-        string text = "The day will come when all will change so enjoy today";
+        Reference newReference = new Reference ("Proverbs",3,5,6);
+        string text = "Trust in the Lord with all thine heart and lean not unto your own"
+        +"understanding; in all thy ways acknowledge him, and he shall direct thy paths.";
         Scripture newScripture = new Scripture(newReference , text);
         string userKey = " ";
         Random random = new Random();
@@ -15,6 +16,7 @@ class Program
         {
             Console.Clear();
             Console.WriteLine(newScripture.GetDisplayText());
+            Console.WriteLine();
             Console.WriteLine("Press enter to continue or type 'quit' to finish");
             done = newScripture.IsCompletelyHidden();
             if (!newScripture.IsCompletelyHidden())
