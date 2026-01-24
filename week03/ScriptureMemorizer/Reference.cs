@@ -1,4 +1,3 @@
-using System.Security.Cryptography;
 
 public class Reference
 {
@@ -12,13 +11,14 @@ public class Reference
         _book = book;
         _chapter = Chapter;
         _verse = verse;
+        _endVerse = verse;
     }
 
-    public Reference(string book, int Chapter, int vers, int endVerse)
+    public Reference(string book, int Chapter, int verse, int endVerse)
     {
         _book = book;
         _chapter = Chapter;
-        _verse = vers;
+        _verse = verse;
         _endVerse = endVerse;
     }
     public string GetDisplayText()

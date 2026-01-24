@@ -1,4 +1,3 @@
-using System.Diagnostics;
 
 public class Scripture
 {
@@ -7,12 +6,10 @@ public class Scripture
 
     public Scripture (Reference reference, string text)
     {
-        // list the text string to an object list
+        // text string to an object list
         _reference = reference;
         _words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries)
             .Select(word=> new Word(word)).ToList();
-
-
     }
 
     public void HideRandomWords(int numberToHide)
@@ -29,7 +26,6 @@ public class Scripture
                 _words[index].Hide();
                 hiddenNumber++;
             }
-            //availableToHide - 1 = availableToHide;
         }
     }
     
@@ -37,9 +33,7 @@ public class Scripture
     {
         string wordsText = string.Join(" ", _words.Select(word => word.GetDisplayText()));
         return $" {_reference.GetDisplayText()}: {wordsText}";
-       
     }
-
     public bool IsCompletelyHidden()
     {
         bool complete = false;
