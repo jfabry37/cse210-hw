@@ -6,7 +6,6 @@ public class Scripture
 
     public Scripture (Reference reference, string text)
     {
-        // text string to an object list
         _reference = reference;
         _words = text.Split(' ', StringSplitOptions.RemoveEmptyEntries)
             .Select(word=> new Word(word)).ToList();
@@ -28,7 +27,6 @@ public class Scripture
             }
         }
     }
-    
     public string GetDisplayText()
     {
         string wordsText = string.Join(" ", _words.Select(word => word.GetDisplayText()));
