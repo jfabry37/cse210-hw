@@ -1,4 +1,4 @@
-using System.Globalization;
+//using System.Globalization;
 
 public class Comments
 {
@@ -10,10 +10,8 @@ public class Comments
         _commenter = commenter;
         _comment = comment;
     }
- 
-    public string GetDisplayText()
+    public void GetDisplayComment()
     {
-        // Iterate through the list to be Displayed in the main program
-      return $"Name: {_commenter} ({_comment})";  
+      Console.WriteLine($"Name: {_commenter} < ({_comment}) >");  
     }
 }

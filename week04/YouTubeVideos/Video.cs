@@ -1,37 +1,38 @@
+//using System.Diagnostics;
 public class Video
 {
     private string _title;
     private string _author;
     private string _length;
-
+    private List<Comments> _comments;
     public Video(string title, string author, string length)
     {
         _title = title;
         _author = author;
         _length = length;
+        _comments = new List<Comments>();
     }
-
+    public void AddComment(string name, string text)
+    {
+        _comments.Add(new Comments (name, text));
+    }
     public void VideoLength()
     {
         // length of the of the video.
-        string [] parts = length.Split(':');
-        minutes = int.TryParse[0];
-        seconds = int.TryParse[1];
-        Length= (minutes * 60) + seconds;   
+        // string [] parts = _length.Split(':');
+        // string minutes = [0];
+        // string seconds = [1];
+        //Length= (minutes * 60) + seconds;   
     }
-
-    public void NumberOfComments(int number)
-    {
-        // retrieves the number of comments from newcomments.ListOfComments
-        number = newComments.NumberofCommnets(number);
-    }
-    public string GetDisplayText()
+    public void Display()
     {
         //Display the Title, Author, Length, and # of comments 
         // To display in the main program.
-        return $"title:{_title} By:{_author} Length:{_length}, with #{number} comments.";
+        Console.WriteLine($"title:{_title} By:{_author} Length:{_length}, with #{_comments.Count} comments.");
+        foreach (Comments comment in _comments)
+        {
+            comment.GetDisplayComment();
+        }
     }
-
-
 
 }
