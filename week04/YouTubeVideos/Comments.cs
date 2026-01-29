@@ -1,5 +1,3 @@
-//using System.Globalization;
-
 public class Comments
 {
     private string _commenter;
@@ -12,6 +10,6 @@ public class Comments
     }
     public void GetDisplayComment()
     {
-      Console.WriteLine($"Name: {_commenter} < ({_comment}) >");  
+      Console.WriteLine($"Name: {_commenter} ({_comment})");  
     }
 }
