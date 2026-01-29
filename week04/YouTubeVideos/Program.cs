@@ -1,13 +1,12 @@
 using System;
 using System.Diagnostics;
 using System.Globalization;
-
-
 class Program
 {
     static void Main(string[] args)
     {
         List<Video> videos = new List<Video>();
+
         Video video1 = new Video ("C# classes", "Bob", "2:30");
         video1.AddComment ("Mary", "Very helpful.");
         video1.AddComment ("Joe", "Amazing.");
@@ -19,20 +18,17 @@ class Program
         video2.AddComment ("John","Superb content.");
 
         Video video3 = new Video ("Python Functions", "Tom", "4:15");
-        video3.AddComment ("Evie", "Very informative.");
+        video3.AddComment ("Eve", "Very informative.");
         video3.AddComment ("Sam", "Very Helpful."); 
         video3.AddComment ("James","Amazing content.");    
 
         videos.Add (video1);
         videos.Add (video2);
         videos.Add (video3);
-        //Video newVideo = new Video (title, author, length, number of comments);
-        //Comments newComments = new Comments (name, comment);
 
         foreach (Video video in videos)
         {
             video.Display();
-            Console.WriteLine();
         }
     }
 
