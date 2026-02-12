@@ -4,10 +4,19 @@ class ChecklistGoal: Goal
     private int _target;
     private int _bonus;
 
-    public ChecklistGoal(string name, string description, string points, int target, int bonus, int amountCompleted): base(name, description, points)
+    public ChecklistGoal(string name, string description, string points, int target, int amountCompleted, int bonus): base(name, description, points)
     {
         _amountCompleted = amountCompleted;
         _target = target;
+        _bonus = bonus;
+    }
+
+    public int GetBonus()
+    {
+        return _bonus;
+    }
+    public void SetBonus(int bonus)
+    {
         _bonus = bonus;
     }
 
@@ -25,20 +34,14 @@ class ChecklistGoal: Goal
         else
         {
             return false;
-        } 
-        
+        }    
     }
-
-
     public override string GetDetailsString()
     {
         return $" -- Currently completed: {_amountCompleted}/{_target}";
     }
     public override string GetStringRepresentation()
     {
-        return $"ChecklistGoal:{GetName()},{GetDescription()},{GetPoints()},{_bonus},{_amountCompleted},{_target}";
+        return $"ChecklistGoal:{GetName()},{GetDescription()},{GetPoints()},{_target},{_amountCompleted},{_bonus}";
     }
-
-
-
 }

@@ -12,10 +12,10 @@ class GoalManager
     }
 
     public void DisplayMenu()
-    {   string selected = "";
+    {   string selected = "0";
         while(selected != "6")
         {
-            Console.WriteLine("Menu Options:");
+            Console.WriteLine("\nMenu Options:");
             Console.WriteLine("1. Create New Goal");
             Console.WriteLine("2. List Goals");
             Console.WriteLine("3. Save Goals");
@@ -30,18 +30,26 @@ class GoalManager
             }
 
             else if ( selected == "2")
-            {
+            {   int count = 0;
                 foreach (Goal goal in _goals)
                 {
+                    count += 1;
                     string statusComplete = "[ ]";
                     if (goal.IsComplete() == true)
                     {
                         statusComplete = "[X]";
                     }
-                    Console.WriteLine($"{statusComplete} {goal.GetName()} ({goal.GetDescription()}) ({goal.GetDetailsString()}) ");
-                    DisplayPlayerInfo();
+                    if (goal is ChecklistGoal)
+                    {
+                        Console.WriteLine($"{count}. {statusComplete} {goal.GetName()} ({goal.GetDescription()}) {goal.GetDetailsString()} \n");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{count}. {statusComplete} {goal.GetName()} ({goal.GetDescription()}) \n");
+                    }
 
                 }   
+                    DisplayPlayerInfo();
             }
 
             else if ( selected == "3")
@@ -61,14 +69,8 @@ class GoalManager
             }
         }
     public void Start()
-    {
-        string selected = "0";
-
-        while (selected != "6")
-        {
-            Console.WriteLine($"You have {_score} points.\n");
-            DisplayMenu();
-        }
+    {      
+        DisplayMenu();
     }
     public void DisplayPlayerInfo()
     {
@@ -135,7 +137,7 @@ class GoalManager
             int target = int.Parse(Console.ReadLine());
             Console.Write("What is the bonus for accomplishing it that many times? ");
             int bonus = int.Parse(Console.ReadLine());
-            Goal newGoal = new ChecklistGoal(name, description, points, target, bonus, amountCompleted);
+            Goal newGoal = new ChecklistGoal(name, description, points, target,amountCompleted, bonus);
             _goals.Add(newGoal);
         }
     }
@@ -152,23 +154,25 @@ class GoalManager
         Console.Write("Which goal did you accomplish? ");
         int choice = int.Parse(Console.ReadLine());
         _goals[choice - 1].RecordEvent();
-            if (_goals == SimpleGoal)
+        var selected = _goals[choice - 1];
+            if (selected is SimpleGoal)
             {
-                _score += int.Parse(_goals[choice - 1].GetPoints());
+                _score += int.Parse(selected.GetPoints());
             }
-            else if (_goals == EternalGoal)
+            else if (selected is EternalGoal)
             {
-                _score += int.Parse(_goals[choice - 1].GetPoints());
+                _score += int.Parse(selected.GetPoints());
             }
-            else if (_goals == ChecklistGoal)
+            else if (selected is ChecklistGoal)
             {
-                _score += int.Parse(_goals[choice - 1].GetPoints());
-                if (_goals[choice - 1].IsComplete() == true)
+                _score += int.Parse(selected.GetPoints());
+                if (selected.IsComplete() == true)
                 {
-                    _score += int.Parse(_goals[choice - 1].GetBonus());
+                    _score += int.Parse(((ChecklistGoal)selected).GetBonus().ToString());
                 }
             }
-            
+        Console.WriteLine($"Congratulations! You have earned {selected.GetPoints()} points!\n");
+        Console.WriteLine($"You now have {_score} points.\n");
             
     }
     public void SaveGoals()
@@ -191,18 +195,9 @@ class GoalManager
         string filename = Console.ReadLine();
         string[] lines = System.IO.File.ReadAllLines(filename);
         _score = int.Parse(lines[0]);
-        foreach ( string item in lines)
+        foreach ( string item in lines.Skip(1))
         {
             string[] parts = item.Split(':');
-            GoalsSplicer();
-        }
-    }
-
-    public void GoalsSplicer()
-    {
-        foreach (Goal goal in _goals)
-        {
-            string  [] parts = goal.GetStringRepresentation().Split(':');
             if (parts[0] == "SimpleGoal")
             {
                 string[] goalParts = parts[1].Split(',');
@@ -219,14 +214,8 @@ class GoalManager
             {
                 string[] goalParts = parts[1].Split(',');
                 Goal newGoal = new ChecklistGoal (goalParts[0], goalParts[1], goalParts[2], int.Parse(goalParts[3]), int.Parse(goalParts[4]), int.Parse(goalParts[5]));
-                // string name = goalParts[0];
-                // string description = goalParts[1];
-                // string points = goalParts[2];
-                // int bonus = int.Parse(goalParts[3]); 
-                // int target = int.Parse(goalParts[5]);
-                // int amountCompleted = int.Parse(goalParts[4]);
-                
                 _goals.Add(newGoal);
+                
             }
         }
     }

@@ -11,7 +11,6 @@ class SimpleGoal : Goal
     public override void RecordEvent()
     {        
         _isComplete = true;
-
     }
 
     public override bool IsComplete()
@@ -22,6 +21,4 @@ class SimpleGoal : Goal
     {
         return $"SimpleGoal:{GetName()},{GetDescription()},{GetPoints()},{_isComplete}";
     }    
-
-
 }
