@@ -1,0 +1,4 @@
+110
+SimpleGoal:paint the Living Room,Paint the Living Room Completly.,200,False
+EternalGoal:study the scriptures,Study the scriptures for 30 minutes.,100
+ChecklistGoal:practice the banjo,practice the banjo for 30 minutes daily.,5,5,2,500

@@ -11,7 +11,7 @@ class GoalManager
         
     }
 
-    public void DisplayMenu()
+    public void Start()
     {   string selected = "0";
         while(selected != "6")
         {
@@ -68,10 +68,10 @@ class GoalManager
             }
             }
         }
-    public void Start()
-    {      
-        DisplayMenu();
-    }
+    // public void Start()
+    // {      
+    //     DisplayMenu();
+    // }
     public void DisplayPlayerInfo()
     {
         Console.WriteLine($"You have {_score} points.");
