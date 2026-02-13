@@ -24,8 +24,7 @@ class Swimming : Activity
         double distance = _laps * 50 / 1000.0;
         double pace = GetDuration() / distance;
         int minutes = (int)pace;
-        int seconds = (int)((pace - minutes) * 60);
-        return $"Pace: {minutes:f1} minutes per mile";
+        return $"Pace: {minutes:f1} min per mile";
     }
 
     public override string GetSummary()
